@@ -1,0 +1,2 @@
+Autocomplete for Tailwind doesn't work.	
+Maybe no tailwind and just CSS, since it lacks even basic styling and can be confsing -> but then ugly.
