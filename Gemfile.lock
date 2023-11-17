@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/hotwired/turbo-rails.git
+  revision: b385276a3ceb2c3ee22e1393e3dbec4797ca930c
+  branch: page-refreshes
+  specs:
+    turbo-rails (1.5.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -189,6 +199,10 @@ GEM
     rake (13.1.0)
     rdoc (6.6.0)
       psych (>= 4.0.0)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.18.0)
+      connection_pool
     regexp_parser (2.8.2)
     reline (0.4.0)
       io-console (~> 0.5)
@@ -212,10 +226,6 @@ GEM
     stringio (3.0.9)
     thor (1.3.0)
     timeout (0.4.1)
-    turbo-rails (1.5.0)
-      actionpack (>= 6.0.0)
-      activejob (>= 6.0.0)
-      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     web-console (4.2.1)
@@ -244,11 +254,12 @@ DEPENDENCIES
   jbuilder
   puma (>= 5.0)
   rails (~> 7.1.1)
+  redis (>= 4.0.1)
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
-  turbo-rails
+  turbo-rails!
   tzinfo-data
   web-console
 
