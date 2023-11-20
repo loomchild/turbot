@@ -1,2 +1,62 @@
+Hypothesis about frames / streams:
+- state should be stored on the server, so:
+  - forms should be generated there and show with JS
+  - or they should be generated based on server state: e.g. params, session 
+  	- perhaps even some specialized store only for this path, or try with flash?
+
+Goal of the talk is to teach.
+Present turbo, try to avoid streams and frames. 
+
+Perhaps modals example? (search)
+
+
+IDEA: show with Turbo 8 disabled, and discover what problems we will hit.
+
+Maybe a demo at the end with other uses:
+- search
+- navigating table while graph above is visible
+
 Autocomplete for Tailwind doesn't work.	
 Maybe no tailwind and just CSS, since it lacks even basic styling and can be confsing -> but then ugly.
+
+App idea:
+table
+with paging
+search
+
+Prepare seed in advance (cheat)
+Everything else from scratch or is it too much?
+Use resources generator
+
+Pagination: simple
+How to do search? Simple by name
+Maybe add some more props, like speaker.
+
+Alpha order.
+Next-Prev at the bottom
+
+Maybe add this BO first, to train with it?
+
+bonus: JS to 
+
+
+Practical Introduction to Turbo
+from zero to hero
+
+IDEAS:
+- Table with paging and search
+	- small, even pagination is already nice
+	- people can relate to this stuff
+	- search more complicated
+	- input is not deleting => nice
+	- scroll show by adding more elements on the page: morph shines; maybe even set the second setting separately.
+
+- Graph with transitions?
+	- or maybe Graph above a table show to see how interactive it is? (<= good idea)
+
+- Some CRUD -> try to modify https://www.hotrails.dev? 
+	- similar to the tutorial online, but with 8?
+	- will still require frames, perhaps good?
+	- trick with IDs for each element to morph to work when adding? dom_id can be used?
+	- maybe multi-edit will work if I have frames everywhere
+	- multi-edit on array is a weird use case, better present it as multiple distinct fields edit.

@@ -1,0 +1,8 @@
+<h1 class="text-xl font-bold mb-2">
+  <%= link_to "←", customers_path %>
+  Edit customer
+</h1>
+
+<%= turbo_frame_tag @customer do %>
+  <%= render "form", customer: @customer %>
+<% end %>

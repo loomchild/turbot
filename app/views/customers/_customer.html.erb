@@ -1,0 +1,12 @@
+<%= turbo_frame_tag customer do %>
+  <div class="flex items-center gap-x-3 h-9">
+    <div>
+      <%= customer.name %>
+    </div>
+
+    <div class="text-xs flex gap-x-2">
+      <%= link_to "Edit", edit_customer_path(customer), class: "text-blue-600" %>
+      <%= button_to "Delete", customer_path(customer), method: :delete, form: { data: { turbo_frame: "_top" } }, class: "text-red-600" %>
+    </div>
+  </div>
+<% end %>

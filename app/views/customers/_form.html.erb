@@ -1,0 +1,12 @@
+<%= form_with model: customer, data: {turbo_permanent: ''}, class: "flex gap-x-3 h-9 items-center" do |form| %>
+  <% if customer.errors.any? %>
+    <div>
+      <%= customer.errors.full_messages.to_sentence.capitalize %>
+    </div>
+  <% end %>
+
+  <%= form.text_field :name, autofocus: true, placeholder: 'Name', class: 'p-1' %>
+
+  <%= form.submit customer.persisted? ? "Update" : "Create", class: "text-xs text-blue-600 cursor-pointer" %>
+<% end %>
+
