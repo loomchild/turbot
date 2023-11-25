@@ -3,6 +3,12 @@ class CustomersController < ApplicationController
 
   def index
     @customers = Customer.all
+
+    session[:editing] ||= []
+    if params.has_key?(:edit)
+      edit_id = params[:edit].to_i
+      session[:editing] << edit_id unless session[:editing].include?(edit_id)
+    end
   end
 
   def new
@@ -24,7 +30,8 @@ class CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to customers_path, notice: "Customer was successfully updated."
+      session[:editing] -= [@customer.id]
+      redirect_to customers_path(editing: params[:editing]), notice: "Customer was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

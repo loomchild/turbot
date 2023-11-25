@@ -1,4 +1,4 @@
-<%= form_with model: customer, data: {turbo_permanent: ''}, class: "flex gap-x-3 h-9 items-center" do |form| %>
+<%= form_with model: customer, data: {turbo_temporary: ''}, class: "flex gap-x-3 h-9 items-center" do |form| %>
   <% if customer.errors.any? %>
     <div>
       <%= customer.errors.full_messages.to_sentence.capitalize %>

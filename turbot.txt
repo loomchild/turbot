@@ -1,13 +1,70 @@
+All merged -> use main... or not?
+
+I want to show that:
+- it's fast (search, maybe over the server show too?)
+- it's easy (no JS at all ideal)
+- it's powerful
+
+Not some general way of building applications.
+
+Turbo:
+Drive
+Frames?
+Streams??
+
+Some slides too:
+There's no cleint side:
+- state
+- router
+
+Maybe show how form submit happens, that button is switched to disabled.
+422 thingy or 303 (show it in action)
+
+Frames as a trick for browser edit is not a good idea it seems -> the main reasons for frames are caching, parallization => not sure if worthy. They also generally shouldn't change URL if I understand correctly.
+
+How it works:
+- intercepts link clicks and form submits (show in browser)
+- replaces body keeps the head (already a benefit)
+
+animation.
+popover?
+
+Frames allow you to replace just part of the page
+- how to show it? => example with paging and search?
+- show some errors if not matching frame
+
+But wait, there's more: morph 
+- merged last week 
+- how to best show it, where it shines? -> multiple distinct regions. => broadcast no...
+--> only with refresh visit (what does it mean?) -> when turbo renders the same page again
+--> actually mostly for scroll position?
+--> benefits: focus, text selection, scroll + broadcasting action as an alternative to sending individual stream updates (before, after, etc.) => maybe here shine an example?
+
+Turbo refresh scroll works on its own, without morph. When page URL changes it's not morph.
+Morph only on replace and when URL didn't change or when from cache
+
+
+
+Central question for the future: decide what is server-side and what is client side. 
+
+IDEA: input.isDirty could be taken into account when morphing
+isDirty obtained by comparing value and defaultValue.
+
 Hypothesis about frames / streams:
 - state should be stored on the server, so:
   - forms should be generated there and show with JS
   - or they should be generated based on server state: e.g. params, session 
   	- perhaps even some specialized store only for this path, or try with flash?
+OH shit:
+- form value is replacing with old on morph.
+- js-based show will also be replaced in morph.
 
 Goal of the talk is to teach.
 Present turbo, try to avoid streams and frames. 
 
 Perhaps modals example? (search)
+
+
 
 
 IDEA: show with Turbo 8 disabled, and discover what problems we will hit.

@@ -1,15 +1,25 @@
 class EventsController < ApplicationController
   PAGE_SIZE = 10
 
-  before_action :set_page, only: [:index]
+  before_action :set_page, only: [:index, :create]
 
   def index
+    @query = session[:query]
+
     @events = Event.limit(PAGE_SIZE).offset(offset)
+
+    @events = @events.where('title LIKE ?', "%#{@query}%") if @query
   end
 
   def show
     @event = Event.find(params[:id])
     @next_event = Event.where('id > ?', params[:id])[0]
+  end
+
+  def create
+    session[:query] = params[:query]
+
+    redirect_to events_path
   end
 
   private

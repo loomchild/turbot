@@ -12,6 +12,10 @@
 
     <meta name="turbo-refresh-method" content="morph">
     <meta name="turbo-refresh-scroll" content="preserve">
+
+    <script>
+      document.addEventListener('turbo:morph', () => { console.log('MORPH') });
+    </script>
   </head>
 
   <body>

@@ -1,10 +1,54 @@
 <h1 class="font-bold text-xl mb-8">Events</h1>
 
+<div class="hidden">
+  <div class="mb-12">
+    <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sem integer vitae justo eget magna fermentum iaculis eu. Lobortis feugiat vivamus at augue eget arcu dictum varius. Magna fermentum iaculis eu non diam. Mi bibendum neque egestas congue quisque. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat. Egestas congue quisque egestas diam in. Quis commodo odio aenean sed adipiscing diam donec adipiscing. Nec sagittis aliquam malesuada bibendum arcu. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis. Vitae sapien pellentesque habitant morbi. Dignissim cras tincidunt lobortis feugiat vivamus. Aliquet enim tortor at auctor urna. Pulvinar mattis nunc sed blandit libero volutpat. Ac turpis egestas maecenas pharetra. Vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Sit amet nulla facilisi morbi tempus iaculis. Dictum varius duis at consectetur lorem donec massa sapien. Nunc pulvinar sapien et ligula ullamcorper malesuada proin.
+    </p>
+
+    <p>
+    Pulvinar sapien et ligula ullamcorper malesuada proin libero. In nulla posuere sollicitudin aliquam ultrices sagittis. Vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Lacinia at quis risus sed vulputate odio. Mauris vitae ultricies leo integer. Tortor consequat id porta nibh venenatis cras sed felis. Massa massa ultricies mi quis hendrerit dolor magna. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus. In hac habitasse platea dictumst quisque sagittis purus sit amet. At urna condimentum mattis pellentesque id. At tempor commodo ullamcorper a lacus vestibulum sed arcu non. Iaculis urna id volutpat lacus. Fringilla est ullamcorper eget nulla facilisi. Elementum nibh tellus molestie nunc. Mattis enim ut tellus elementum sagittis vitae. Malesuada pellentesque elit eget gravida cum.
+    </p>
+
+    <p>
+    Orci porta non pulvinar neque laoreet. Volutpat blandit aliquam etiam erat velit scelerisque. Orci dapibus ultrices in iaculis nunc. Tincidunt arcu non sodales neque sodales. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Integer malesuada nunc vel risus commodo viverra maecenas. Ullamcorper sit amet risus nullam eget felis. Mauris a diam maecenas sed enim ut sem viverra. Scelerisque in dictum non consectetur a erat nam at lectus. Ac turpis egestas maecenas pharetra convallis posuere morbi. At urna condimentum mattis pellentesque id nibh tortor id. Mauris nunc congue nisi vitae. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Donec pretium vulputate sapien nec sagittis aliquam. Augue interdum velit euismod in pellentesque massa placerat duis ultricies. Diam donec adipiscing tristique risus nec feugiat.
+    </p>
+
+    <p>
+    Felis donec et odio pellentesque diam volutpat commodo sed. Risus pretium quam vulputate dignissim suspendisse in. Mi quis hendrerit dolor magna eget est lorem. Praesent tristique magna sit amet purus gravida quis blandit. Molestie ac feugiat sed lectus. Placerat vestibulum lectus mauris ultrices eros. Sit amet volutpat consequat mauris nunc congue nisi. Purus viverra accumsan in nisl nisi scelerisque eu. Bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim. Sed risus ultricies tristique nulla aliquet enim tortor at. Cras sed felis eget velit aliquet sagittis id consectetur purus. Congue eu consequat ac felis donec. Luctus venenatis lectus magna fringilla urna porttitor rhoncus.
+    </p>
+
+    <p>
+    Amet mauris commodo quis imperdiet massa tincidunt nunc pulvinar sapien. Blandit volutpat maecenas volutpat blandit aliquam etiam. Eget dolor morbi non arcu. Volutpat lacus laoreet non curabitur. Arcu felis bibendum ut tristique et. Felis imperdiet proin fermentum leo vel orci porta non pulvinar. Libero id faucibus nisl tincidunt eget nullam non nisi. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Eget mauris pharetra et ultrices neque. Sit amet aliquam id diam maecenas ultricies mi eget mauris. Eu tincidunt tortor aliquam nulla facilisi cras. Sed odio morbi quis commodo odio aenean sed adipiscing diam.
+    </p>
+  </div>
+
+  <%= image_tag "animated.svg", width: '200px' %>
+</div>
+
+<div id="search">
+  <%= form_with url: events_path do |form| %>
+    <input type="text" name="query" placeholder="Filter events" value="<%= session[:query] %>">
+  <% end %>
+
+  <script>
+    document.querySelector('#search input[name=query]').addEventListener('input', function () { this.form.requestSubmit() });
+  </script>
+</div>
+
+<div class="mb-2">
+  <%= link_to 'Add', events_path(page: @page - 1) %>
+</div>
+
 <div class="mb-6 flex gap-4">
-  <%= link_to 'Previous', events_path(page: @page - 1) if @page > 1 %>
-  <%= link_to 'Next', events_path(page: @page + 1) if @page < @max_page %>
+  <%= link_to 'Previous', events_path(page: @page - 1), class: { 'text-gray-400 pointer-events-none': @page <= 1 }, data: { 'turbo-action': 'replace' } %>
+  <%= link_to 'Next', events_path(page: @page + 1), class: { 'text-gray-400 pointer-events-none': @page >= @max_page }, data: { 'turbo-action': 'replace' } %>
 </div>
 
 <div class="space-y-4">
   <%= render partial: 'event', collection: @events %>
 </div>
+
+<script>
+  document.addEventListener('turbo:morph', () => { console.log('MORPH') });
+</script>
