@@ -10,8 +10,9 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
 
-    <meta name="turbo-refresh-method" content="morph">
-    <meta name="turbo-refresh-scroll" content="preserve">
+    <% if content_for?(:head) %>
+      <%= yield(:head) %>
+    <% end %>
 
     <script>
       document.addEventListener('turbo:morph', () => { console.log('MORPH') });
