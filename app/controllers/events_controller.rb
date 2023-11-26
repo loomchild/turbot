@@ -13,13 +13,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    last_event = Event.order(id: :desc).limit(1)[0]
-    number = last_event.id + 1
-
-    Event.create!(title: "Event #{number}")
-
-    last_page = (Event.count - 1) / PAGE_SIZE + 1
-    redirect_to events_path(page: last_page)
   end
 
   def show
