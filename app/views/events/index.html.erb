@@ -9,7 +9,7 @@
 
 <h1 class="font-bold text-xl mb-8">Events</h1>
 
-<div id="search data-turbo-persistent">
+<div id="search" data-turbo-permanent>
   <%= form_with url: events_path, method: :get do |form| %>
     <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', oninput: "this.form.requestSubmit()", value: @query %>
   <% end %>
