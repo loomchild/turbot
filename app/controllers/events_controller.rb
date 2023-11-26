@@ -12,15 +12,8 @@ class EventsController < ApplicationController
     @events = @events.limit(PAGE_SIZE).offset(offset)
   end
 
-  def create
-    session[:query] = params[:query]
-
-    redirect_to events_path
-  end
-
   def show
     @event = Event.find(params[:id])
-    @next_event = Event.where('id > ?', params[:id])[0]
   end
 
   private

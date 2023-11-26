@@ -1,19 +1,8 @@
-<% content_for :head do %>
-  <meta name="turbo-refresh-method" content="morph">
-  <meta name="turbo-refresh-scroll" content="preserve">
-<% end %>
-
 <div class="mb-8">
   <%= image_tag "chart-r" %>
 </div>
 
 <h1 class="font-bold text-xl mb-8">Events</h1>
-
-<div id="search" data-turbo-permanent>
-  <%= form_with url: events_path, method: :get do |form| %>
-    <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', oninput: "this.form.requestSubmit()", value: @query %>
-  <% end %>
-</div>
 
 <div>
   <div class="space-y-4 my-8">
@@ -44,5 +33,3 @@
   Orci porta non pulvinar neque laoreet. Volutpat blandit aliquam etiam erat velit scelerisque. Orci dapibus ultrices in iaculis nunc. Tincidunt arcu non sodales neque sodales. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Integer malesuada nunc vel risus commodo viverra maecenas. Ullamcorper sit amet risus nullam eget felis. Mauris a diam maecenas sed enim ut sem viverra. Scelerisque in dictum non consectetur a erat nam at lectus. Ac turpis egestas maecenas pharetra convallis posuere morbi. At urna condimentum mattis pellentesque id nibh tortor id. Mauris nunc congue nisi vitae. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Donec pretium vulputate sapien nec sagittis aliquam. Augue interdum velit euismod in pellentesque massa placerat duis ultricies. Diam donec adipiscing tristique risus nec feugiat.
   </p>
 </div>
-
-

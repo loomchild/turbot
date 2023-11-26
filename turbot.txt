@@ -1,6 +1,113 @@
-<link rel="stylesheet" href="/assets/tailwind-6f1e996deb21827b7974e48d86fb97e0935c7b459967d248fbba095b2c25d360.css" data-turbo-track="reload">
+TODO: raise bug with scroll back/forward button
 
-<link rel="preload" href="/assets/tailwind-6f1e996deb21827b7974e48d86fb97e0935c7b459967d248fbba095b2c25d360.css" as="stylesheet" data-turbo-track="reload">
+
+Intro ---------------------------------
+
+Wasn't sure what to show you since Turbo is still evolving, best practices are developing.
+
+
+Code tour -----------------------------
+
+Model, data seed, Controller, routes, index, show, paging.
+Using latest turbo-rails, released last week.
+
+Disable Turbo -------------------------
+
+Turbo.session.drive = false
+
+Paging.
+Show individual pages.
+
+Enable it back.
+Not too bad? - disable it back.
+
+
+MAYBE FIX SCROLL HERE?
+
+
+New feature: search box -----------------------------
+
+def index
+...
+    @query = params[:query]
+    @events = @events.where('title LIKE :query OR subtitle LIKE :query OR abstract LIKE :query OR speakers LIKE :query', { query: "%#{@query}%" }) if @query
+
+<div>
+  <%= form_with url: events_path, method: :get do |form| %>
+    <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', value: @query %>
+  <% end %>
+</div>
+
+Remember to press enter
+
+Problems:
+- product feedback - I want search-as-you-type
+- loses focus, especially bad if you like to do search as you type (ADD ONINPUT NOW?)
+- scrolls to the top
+
+
+Frames -------------------------
+
+
+Permanent ----------------------
+
+-> enable turbo: doesn't help.
+
+<div id="search" data-turbo-permanent>
+  <%= form_with url: events_path, method: :get do |form| %>
+    <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', oninput: "this.form.requestSubmit()", value: @query %>
+  <% end %>
+</div>
+
+works, but still loses focus
+
+
+Scrolling fix -------------------
+
+<% content_for :head do %>
+  <meta name="turbo-refresh-scroll" content="preserve">
+<% end %>
+
+Breaks back button scroll -> to be discussed
+
+
+
+Morph -------------------------
+
+  <meta name="turbo-refresh-method" content="morph">
+
+
+  def create
+    session[:query] = params[:query]
+
+    redirect_to events_path
+  end
+
+
+
+
+
+
+
+
+Extras -----------------------------
+
+Turbo.setProgressBarDelay(1)
+
+
+
+
+
+
+When to throttle? -> all the time? only at the beginning? at the end too?
+Show what is being sent and how it works.
+
+
+Intro:
+Using TailwindCSS
+
+Scroll
+Small thingey to add stuff to HEAD. (really needed - only for scrolling)
 
 Scroll per app (so simpler)?
 
@@ -9,12 +116,15 @@ Maybe separate page for no-turbo, turbo, version with fames? no..
 
 Turbo: The speed of a single-page web application without having to write any JavaScript 
 
-1. Build an app that displays events. Has some space above and below the list (maybe) with pagination. Disable Turbo. [PROBLEM: why it refreshes twice?]
-2. Enable turbo - pretty nice
+1. Build an app that displays events.
+2. Enable turbo - benefits: faster, no need to update HEAD (although cached)
 3. Add search box. Show that it loses focus on search
-4. Add a JS line now?
-5. Permanent.
-6. Frame [?]
+4b. Add extra content above and below? Or maybe invert and first explain frames?
+5. Frame
+4. Permanent.
+4b. Scroll but requires scroll? => problems with it
+6. Morph?
+
 
 Github repo of this project.
 
