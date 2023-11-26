@@ -2,13 +2,13 @@ class EventsController < ApplicationController
   PAGE_SIZE = 10
 
   def index
-    @events = Event
+    @events = Event.order('LOWER(title)')
 
     @query = params[:query]
-    @events = @events.where('title LIKE ?', "%#{@query}%") if @query
+    @events = @events.where('title LIKE :query OR subtitle LIKE :query OR abstract LIKE :query OR speakers LIKE :query', { query: "%#{@query}%" }) if @query
 
     @page = page
-    @last_page = (@events.count - 1) / PAGE_SIZE + 1
+    @last_page = [@events.count - 1, 0].max / PAGE_SIZE + 1
     @events = @events.limit(PAGE_SIZE).offset(offset)
   end
 

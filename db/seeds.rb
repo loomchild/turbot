@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+
+Event.delete_all
+
+file = File.read('./db/seeds/fosdem-2023.json')
+data = JSON.parse(file).deep_symbolize_keys
+
+data[:events].each do |event|
+  Event.create!(
+    title: event[:title],
+    subtitle: event[:subtitle] || '',
+    abstract: event[:abstract] || '',
+    description: event[:description] || '',
+    speakers: event[:persons]&.join(', ') || ''
+  )
+end
