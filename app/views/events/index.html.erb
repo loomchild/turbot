@@ -9,24 +9,28 @@
 
 <h1 class="font-bold text-xl mb-8">Events</h1>
 
-<div id="search" data-turbo-permanent>
-  <%= form_with url: events_path, method: :get do |form| %>
-    <%= form.text_field :query, placeholder: 'Filter events', oninput: "this.form.requestSubmit()", value: @query %>
+<div id="search">
+  <%= form_with url: events_path, method: :get, data: { 'turbo-frame': 'events' } do |form| %>
+    <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', oninput: "this.form.requestSubmit()", value: @query %>
   <% end %>
 </div>
 
-<div class="space-y-4 my-8">
-  <%= render partial: 'event', collection: @events %>
-</div>
+<turbo-frame id="events">
+  <div class="space-y-4 my-8">
+    <%= render partial: 'event', collection: @events %>
+  </div>
 
-<div class="flex gap-4">
-  <%= link_to 'First', events_path(page: 1, query: @query), class: { 'text-gray-400 pointer-events-none': @page <= 1 } %>
-  <%= link_to 'Previous', events_path(page: @page - 1, query: @query), class: { 'text-gray-400 pointer-events-none': @page <= 1 } %>
-  <%= link_to 'Next', events_path(page: @page + 1, query: @query), class: { 'text-gray-400 pointer-events-none': @page >= @last_page } %>
-  <%= link_to 'Last', events_path(page: @last_page, query: @query), class: { 'text-gray-400 pointer-events-none': @page >= @last_page } %>
-</div>
+  <div class="flex gap-4">
+    <%= link_to 'First', events_path(page: 1, query: @query), class: { 'text-gray-400 pointer-events-none': @page <= 1 } %>
+    <%= link_to 'Previous', events_path(page: @page - 1, query: @query), class: { 'text-gray-400 pointer-events-none': @page <= 1 } %>
+    <%= link_to 'Next', events_path(page: @page + 1, query: @query), class: { 'text-gray-400 pointer-events-none': @page >= @last_page } %>
+    <%= link_to 'Last', events_path(page: @last_page, query: @query), class: { 'text-gray-400 pointer-events-none': @page >= @last_page } %>
+  </div>
+</turbo-frame>
 
-<div class="mt-4">
+
+
+<div class="mt-4 hidden">
   <%= form_with url: events_path do |form| %>
     <%= form.submit 'Create', class: 'cursor-pointer' %>
   <% end %>
