@@ -22,7 +22,9 @@ Enable it back.
 Not too bad? - disable it back.
 
 
-MAYBE FIX SCROLL HERE?
+Fix scrolling with Frames ----------------------------
+
+<turbo-frame id="events"> zamiast DIV
 
 
 New feature: search box -----------------------------
@@ -31,6 +33,8 @@ def index
 ...
     @query = params[:query]
     @events = @events.where('title LIKE :query OR subtitle LIKE :query OR abstract LIKE :query OR speakers LIKE :query', { query: "%#{@query}%" }) if @query
+
+add query to prev/next links
 
 <div>
   <%= form_with url: events_path, method: :get do |form| %>
