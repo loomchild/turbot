@@ -3,25 +3,15 @@
   <meta name="turbo-refresh-scroll" content="preserve">
 <% end %>
 
-<h1 class="font-bold text-xl mb-8">Events</h1>
-
-<div class="mb-12 space-y-2">
-  <p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sem integer vitae justo eget magna fermentum iaculis eu. Lobortis feugiat vivamus at augue eget arcu dictum varius. Magna fermentum iaculis eu non diam. Mi bibendum neque egestas congue quisque. Ultricies lacus sed turpis tincidunt id aliquet risus feugiat. Egestas congue quisque egestas diam in. Quis commodo odio aenean sed adipiscing diam donec adipiscing. Nec sagittis aliquam malesuada bibendum arcu. Ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis. Vitae sapien pellentesque habitant morbi. Dignissim cras tincidunt lobortis feugiat vivamus. Aliquet enim tortor at auctor urna. Pulvinar mattis nunc sed blandit libero volutpat. Ac turpis egestas maecenas pharetra. Vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Sit amet nulla facilisi morbi tempus iaculis. Dictum varius duis at consectetur lorem donec massa sapien. Nunc pulvinar sapien et ligula ullamcorper malesuada proin.
-  </p>
-
-  <p>
-  Pulvinar sapien et ligula ullamcorper malesuada proin libero. In nulla posuere sollicitudin aliquam ultrices sagittis. Vulputate ut pharetra sit amet aliquam id diam maecenas ultricies. Lacinia at quis risus sed vulputate odio. Mauris vitae ultricies leo integer. Tortor consequat id porta nibh venenatis cras sed felis. Massa massa ultricies mi quis hendrerit dolor magna. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. Non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus. In hac habitasse platea dictumst quisque sagittis purus sit amet. At urna condimentum mattis pellentesque id. At tempor commodo ullamcorper a lacus vestibulum sed arcu non. Iaculis urna id volutpat lacus. Fringilla est ullamcorper eget nulla facilisi. Elementum nibh tellus molestie nunc. Mattis enim ut tellus elementum sagittis vitae. Malesuada pellentesque elit eget gravida cum.
-  </p>
-
-  <p>
-  Orci porta non pulvinar neque laoreet. Volutpat blandit aliquam etiam erat velit scelerisque. Orci dapibus ultrices in iaculis nunc. Tincidunt arcu non sodales neque sodales. Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis. Integer malesuada nunc vel risus commodo viverra maecenas. Ullamcorper sit amet risus nullam eget felis. Mauris a diam maecenas sed enim ut sem viverra. Scelerisque in dictum non consectetur a erat nam at lectus. Ac turpis egestas maecenas pharetra convallis posuere morbi. At urna condimentum mattis pellentesque id nibh tortor id. Mauris nunc congue nisi vitae. Nullam eget felis eget nunc lobortis mattis aliquam faucibus purus. Donec pretium vulputate sapien nec sagittis aliquam. Augue interdum velit euismod in pellentesque massa placerat duis ultricies. Diam donec adipiscing tristique risus nec feugiat.
-  </p>
+<div class="mb-8">
+  <%= image_tag "chart-r" %>
 </div>
+
+<h1 class="font-bold text-xl mb-8">Events</h1>
 
 <div id="search" data-turbo-permanent>
   <%= form_with url: events_path, method: :get do |form| %>
-    <%= form.text_field :query, placeholder: 'Filter events', oninput: "this.form.requestSubmit()" %>
+    <%= form.text_field :query, placeholder: 'Filter events', oninput: "this.form.requestSubmit()", value: @query %>
   <% end %>
 </div>
 
