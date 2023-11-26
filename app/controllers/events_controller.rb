@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   def index
     @events = Event.order('LOWER(title)')
 
-    @query = session[:query] || params[:query]
+    @query = params[:query]
     @events = @events.where('title LIKE :query OR subtitle LIKE :query OR abstract LIKE :query OR speakers LIKE :query', { query: "%#{@query}%" }) if @query
 
     @page = page
