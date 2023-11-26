@@ -7,7 +7,11 @@
 
 <div>
   <div class="space-y-4 my-8">
-    <%= render partial: 'event', collection: @events %>
+    <% @events.each do |event| %>
+      <div>
+        <%= link_to event.title, event %>
+      </div>
+    <% end %>
   </div>
 
   <div class="flex gap-4">
