@@ -15,7 +15,7 @@ Generally app generated, with one resource and some dummy content added and disa
 
 Show the app, open an event.
 Data is seeded from FOSDEM conference, about 700 talks.
-Show page (first event is nice).
+Show page (7 things event, A case for DAG databases (2nd page) is nice).
 Paging.
 
 Model -> schema.rb, routes, controller: paging, views (focus): show standard back button, index: dummy content, loop (no partial for simplicity), paginatuion.
@@ -43,9 +43,13 @@ Application is sleeker:
 - Replaces body, but generally leaves the head as is (can be customized) 
 Less requests, even if to cache.
 
+<enable throttle>
+
 - caching when going forward (retrieve page from cache first and displays it, then makes a request)
 
 - just neat tricks - but it doesn't help with the pagination:)
+
+<disable throttle>
 
 
 Fix scrolling with Frames (5m) ----------------------------
@@ -60,7 +64,7 @@ Explain Nav within frame: it looks for <turbo-frame> element with the same ID.
 Add <turbo-frame> to event page to show how it works, but not what we want.
 Fix show event page.
 
-Special frame called _top
+Special frame called _top, and on each link or form we can target a specific form.
   <%= link_to event.title, event, data: { 'turbo-frame': '_top' } %>
 
 
@@ -91,25 +95,41 @@ Fix: (I cheated there would be no JS)
 How to do it with Frames:
 - Move search box outside.
 
-Try: 
-- show Network tab, what's happening there? -> request for each 
 
 Need to target the right frame:
 - data: { 'turbo-frame': 'events' } on <form>
 
 
+Try: 
+- show Network tab, what's happening there? -> request for each 
+
+
+
 Problem:
 - query or page not reflected in URL -> refresh will go back to 1 -> but back and forth works OK.
+
+<enable and disable throttle to show it can be fast>
+Can be further improved by loading data to each frame separately via controller.
+
 
 Also: a bit complicated solution.
 Maybe something simpler exists.
 
 SORTA... latest version released last week adds refresh scroll and morph. Let's see how it works.
 
+If we have 10 more minutes I can perhaps show an alternative solution?
 
-END HERE?
 
-Permanent ----------------------
+END ---------------
+- sleeker and solved 2 issues not possible without Turbo: scrolling and preserving focus on input field.
+- hope you found this presentation intriguing, and want to continue exploring alternative solutions to front-end development
+- part 2 possible with more advanced features, such as streaming / broadcasting updates. MORPH (currently very limited since works only if refreshing the same page, developing)
+
+
+
+Permanent (optional) ----------------------
+
+Revert all changes after commit.
 
 Manuall changes in index.html.erb, in <turbo-frame>, leave the search box.
 Remove turbo-frame from it.
@@ -136,11 +156,6 @@ Scrolling fix -------------------
 Breaks back button scroll -> raised an issue.
 
 
-
-END ---------------
-- sleeker and solved 2 issues not possible without Turbo: scrolling and preserving focus on input field.
-- hope you found this presentation intriguing, and want to continue exploring alternative solutions to front-end development
-- part 2 possible with more advanced features, such as streaming / broadcasting updates. MORPH.
 
 
 STREAMS and MORPH: next time if you like.

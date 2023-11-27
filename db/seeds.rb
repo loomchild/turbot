@@ -16,7 +16,7 @@ data = JSON.parse(file).deep_symbolize_keys
 
 data[:events].each do |event|
   Event.create!(
-    title: event[:title],
+    title: event[:title].strip,
     subtitle: event[:subtitle] || '',
     abstract: event[:abstract] || '',
     description: event[:description] || '',
