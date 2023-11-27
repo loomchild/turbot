@@ -2,46 +2,53 @@ TODO: raise bug with scroll back/forward button
 
 Just speak up if you have a question.
 
-Intro (2m) ---------------------------------
+Intro (1m) ---------------------------------
 
 Wasn't sure what to show you since Turbo is still evolving, best practices are being developed.
 Actually JS is not a problem, stateful JS is.
 HTML over the wire
 
 
-Code tour (3m) -----------------------------
+Product and code tour (3m) -----------------------------
 
-Generally app generated, with one resource and some dummy content added. Sqlite3
+Generally app generated, with one resource and some dummy content added and disabled Turbo.
+
 Show the app, open an event.
+Data is seeded from FOSDEM conference, about 700 talks.
+Show page (first event is nice).
+Paging.
+
 Model -> schema.rb, routes, controller: paging, views (focus): show standard back button, index: dummy content, loop (no partial for simplicity), paginatuion.
+Turbo.session.drive = false => it's opt-out
+
 Using latest turbo-rails, released last week. Using TailwindCSS as you might have noticed
 
 opacity-30 for image/lorem ipsum to focus.
 Commit after the change
 
-Disable Turbo -------------------------
-
-Turbo.session.drive = false
-
-Paging.
-Show page.
+Application is pretty neat and fast, but we can already see problems, most notably scroll position.
+Also fast, because it's local - each visit a page refresh, as we can see in Network tab (but not too bad since browsers are smart.
 
 Problems:
 - scrolling. Requires something like turbo.
 
-Turbo Drive ------------------------------
+Turbo Drive (2m) ------------------------------
 
 Turbo Drive accelerates links and form submissions by negating the need for full page reloads.
 
 Enable it -> 
 Application is sleeker:
 - speed of navigation - no need to reload the whole page
-- but still sent
 
--> doesn't help:)
+- Replaces body, but generally leaves the head as is (can be customized) 
+Less requests, even if to cache.
+
+- caching when going forward (retrieve page from cache first and displays it, then makes a request)
+
+- just neat tricks - but it doesn't help with the pagination:)
 
 
-Fix scrolling with Frames ----------------------------
+Fix scrolling with Frames (5m) ----------------------------
 
 Turbo Frames decompose pages into independent contexts, which scope navigation and can be lazily loaded.
 
@@ -49,6 +56,7 @@ Turbo Frames decompose pages into independent contexts, which scope navigation a
 
 Show console, content missing.
 
+Explain Nav within frame: it looks for <turbo-frame> element with the same ID. 
 Add <turbo-frame> to event page to show how it works, but not what we want.
 Fix show event page.
 
@@ -56,7 +64,7 @@ Special frame called _top
   <%= link_to event.title, event, data: { 'turbo-frame': '_top' } %>
 
 
-New feature: search box -----------------------------
+New feature: search box (5m) -----------------------------
 
 def index
 ...
@@ -77,7 +85,7 @@ Problems:
 Fix: (I cheated there would be no JS)
  oninput: "this.form.requestSubmit()"
 
-- loses focus, was happening before but now especially disturbing
+- IMPORTANT: loses focus, was happening before but now especially disturbing
 - scrolls to the top
 
 How to do it with Frames:
@@ -98,6 +106,8 @@ Maybe something simpler exists.
 
 SORTA... latest version released last week adds refresh scroll and morph. Let's see how it works.
 
+
+END HERE?
 
 Permanent ----------------------
 
@@ -126,6 +136,13 @@ Scrolling fix -------------------
 Breaks back button scroll -> raised an issue.
 
 
+
+END ---------------
+- sleeker and solved 2 issues not possible without Turbo: scrolling and preserving focus on input field.
+- hope you found this presentation intriguing, and want to continue exploring alternative solutions to front-end development
+- part 2 possible with more advanced features, such as streaming / broadcasting updates. MORPH.
+
+
 STREAMS and MORPH: next time if you like.
 Issue: morph limited, works only if page is exactly the same, so need to update DB or store state in session.
 Got it working but code was somewhat ugly (need to pass data between session.) -> needs best practices or improvements. Also authors state that it's currently not a replacement for STREAMS or FORMSqg.
@@ -142,32 +159,7 @@ Got it working but code was somewhat ugly (need to pass data between session.) -
 
 
 
-
-
-
-
-Extras -----------------------------
-
-Turbo.setProgressBarDelay(1)
-
-
-
-
-
-
-When to throttle? -> all the time? only at the beginning? at the end too?
-Show what is being sent and how it works.
-
-
-Intro:
-Using TailwindCSS
-
-Scroll
-Small thingey to add stuff to HEAD. (really needed - only for scrolling)
-
 Scroll per app (so simpler)?
-
-Maybe separate page for no-turbo, turbo, version with fames? no..
 
 
 Turbo: The speed of a single-page web application without having to write any JavaScript 
@@ -181,8 +173,6 @@ Turbo: The speed of a single-page web application without having to write any Ja
 4b. Scroll but requires scroll? => problems with it
 6. Morph?
 
-
-Github repo of this project.
 
 References:
 0. Link to code repo
@@ -198,10 +188,6 @@ Show what travels over the wire.
 
 For server-side demo: enable GPRS throttling.
 Also shows the navigation icon.
-
-END:
-- hope you found it intriguing
-- part 2 possible with more advanced features, such as streaming / broadcasting updates
 
 I want to show that:
 - it's fast (search, maybe over the server show too?)
