@@ -1,12 +1,11 @@
-TODO: raise bug with scroll back/forward button
-
-Just speak up if you have a question.
-
 Intro (1m) ---------------------------------
 
 Wasn't sure what to show you since Turbo is still evolving, best practices are being developed.
 Actually JS is not a problem, stateful JS is.
 HTML over the wire
+Also hard to show it in a short presentation, so I chose a small part: Drive and Frames. 
+Just speak up if you have a question.
+
 
 
 Product and code tour (3m) -----------------------------
@@ -117,7 +116,7 @@ Maybe something simpler exists.
 
 SORTA... latest version released last week adds refresh scroll and morph. Let's see how it works.
 
-If we have 10 more minutes I can perhaps show an alternative solution?
+Next time, I can perhaps show an solution and play with Morph. 
 
 
 END ---------------
