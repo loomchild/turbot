@@ -8,7 +8,7 @@ Just speak up if you have a question.
 
 
 
-Product and code tour (3m) -----------------------------
+Product and code tour (5m) -----------------------------
 
 Generally app generated, with one resource and some dummy content added and disabled Turbo.
 
@@ -17,23 +17,23 @@ Data is seeded from FOSDEM conference, about 700 talks.
 Show page (7 things event, A case for DAG databases (2nd page) is nice).
 Paging.
 
-Model -> schema.rb, routes, controller: paging, views (focus): show standard back button, index: dummy content, loop (no partial for simplicity), paginatuion.
+schema.rb, controller: paging, views (focus): show standard back button, index: dummy content, loop (no partial for simplicity), paginatuion.
 Turbo.session.drive = false => it's opt-out
 
 Using latest turbo-rails, released last week. Using TailwindCSS as you might have noticed
 
+Application is pretty neat and fast, but we can already see problems, most notably scroll position. We won't be able to solve this without JavaScript, but in Turbo we don't have to write it.
+Also fast, because it's local - each visit a page refresh, as we can see in Network tab (but not too bad since browsers are smart.
+<open network-tab>
+
 opacity-30 for image/lorem ipsum to focus.
 Commit after the change
 
-Application is pretty neat and fast, but we can already see problems, most notably scroll position.
-Also fast, because it's local - each visit a page refresh, as we can see in Network tab (but not too bad since browsers are smart.
+Go to first page.
 
-Problems:
-- scrolling. Requires something like turbo.
+Turbo Drive (4m) ------------------------------
 
-Turbo Drive (2m) ------------------------------
-
-Turbo Drive accelerates links and form submissions by negating the need for full page reloads.
+Turbo Drive accelerates links and form submissions by negating the need for full page reloads. It intercepts them.
 
 Enable it -> 
 Application is sleeker:
@@ -49,11 +49,11 @@ Less requests, even if to cache.
 - just neat tricks - but it doesn't help with the pagination:)
 
 <disable throttle>
-
+<close network tab>
 
 Fix scrolling with Frames (5m) ----------------------------
 
-Turbo Frames decompose pages into independent contexts, which scope navigation and can be lazily loaded.
+Turbo Frames decompose pages into independent contexts, which scope navigation.
 
 <turbo-frame id="events"> zamiast DIV
 
@@ -74,45 +74,43 @@ def index
     @query = params[:query]
     @events = @events.where('title LIKE :query OR subtitle LIKE :query OR abstract LIKE :query OR speakers LIKE :query', { query: "%#{@query}%" }) if @query
 
-<div>
-  <%= form_with url: events_path, method: :get do |form| %>
-    <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', value: @query %>
-  <% end %>
-</div>
+Inside the frame, Copy and explain
+  <!-- Search -->
+  <div>
+    <%= form_with url: events_path, method: :get do |form| %>
+      <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', value: @query %>
+    <% end %>
+  </div>
 
-Remember to press enter
+Show that it works. Remember to press enter
 
 Problems:
 - product feedback - I want search-as-you-type
 
-Fix: (I cheated there would be no JS)
+NO PROBLEM: Fix: (I cheated there would be no JS)
  oninput: "this.form.requestSubmit()"
 
 - IMPORTANT: loses focus, was happening before but now especially disturbing
-- scrolls to the top
 
 How to do it with Frames:
 - Move search box outside.
 
+If I ran it now, then it would refresh the whole page (show depending on time, but make sure to reset to 1st page?)
 
 Need to target the right frame:
 - data: { 'turbo-frame': 'events' } on <form>
 
-
-Try: 
-- show Network tab, what's happening there? -> request for each 
-
-
-
-Problem:
-- query or page not reflected in URL -> refresh will go back to 1 -> but back and forth works OK.
-
+Try now.
+<show what's it doing in network>
+<probably requires debounce>
 <enable and disable throttle to show it can be fast>
-Can be further improved by loading data to each frame separately via controller.
+
+Small? Problem:
+- query or page not reflected in URL -> refresh will go back to 1 -> but back and forth works OK, even remembers query and page, unlike customer list.
 
 
 Also: a bit complicated solution.
-Maybe something simpler exists.
+Maybe something simpler exists - Yes. IF more time I can or next time ask?
 
 SORTA... latest version released last week adds refresh scroll and morph. Let's see how it works.
 
@@ -120,9 +118,9 @@ Next time, I can perhaps show an solution and play with Morph.
 
 
 END ---------------
-- sleeker and solved 2 issues not possible without Turbo: scrolling and preserving focus on input field.
+- sleeker and solved 2 issues not possible without JS: scrolling and preserving focus on input field.
 - hope you found this presentation intriguing, and want to continue exploring alternative solutions to front-end development
-- part 2 possible with more advanced features, such as streaming / broadcasting updates. MORPH (currently very limited since works only if refreshing the same page, developing)
+- part 2 possible with more advanced features, such as streaming / broadcasting updates. MORPH (released last week, currently very limited since works only if refreshing the same page, developing)
 
 
 
