@@ -1,18 +1,21 @@
 TODO: raise bug with scroll back/forward button
-Create a presentation with title, intro, Further reading, demo time
 
-Intro ---------------------------------
+Just speak up if you have a question.
 
-Wasn't sure what to show you since Turbo is still evolving, best practices are developing.
-Objective: UX without using JS. Actually JS is not a problem, stateful JS is.
+Intro (2m) ---------------------------------
+
+Wasn't sure what to show you since Turbo is still evolving, best practices are being developed.
+Actually JS is not a problem, stateful JS is.
+HTML over the wire
 
 
-Code tour -----------------------------
+Code tour (3m) -----------------------------
 
-Model, data seed, Controller, routes, index, show, paging.
-Using latest turbo-rails, released last week.
+Generally app generated, with one resource and some dummy content added. Sqlite3
+Show the app, open an event.
+Model -> schema.rb, routes, controller: paging, views (focus): show standard back button, index: dummy content, loop (no partial for simplicity), paginatuion.
+Using latest turbo-rails, released last week. Using TailwindCSS as you might have noticed
 
-We will be working with events.
 opacity-30 for image/lorem ipsum to focus.
 Commit after the change
 
@@ -26,11 +29,21 @@ Show page.
 Problems:
 - scrolling. Requires something like turbo.
 
+Turbo Drive ------------------------------
+
+Turbo Drive accelerates links and form submissions by negating the need for full page reloads.
+
 Enable it -> 
+Application is sleeker:
+- speed of navigation - no need to reload the whole page
+- but still sent
+
 -> doesn't help:)
 
 
 Fix scrolling with Frames ----------------------------
+
+Turbo Frames decompose pages into independent contexts, which scope navigation and can be lazily loaded.
 
 <turbo-frame id="events"> zamiast DIV
 
@@ -115,7 +128,7 @@ Breaks back button scroll -> raised an issue.
 
 STREAMS and MORPH: next time if you like.
 Issue: morph limited, works only if page is exactly the same, so need to update DB or store state in session.
-Got it working but code was somewhat ugly (need to pass data between session.) -> needs best practices or improvements. Also authors state that it's currently not a replacement for STREAMS or FORMS.
+Got it working but code was somewhat ugly (need to pass data between session.) -> needs best practices or improvements. Also authors state that it's currently not a replacement for STREAMS or FORMSqg.
 
   <meta name="turbo-refresh-method" content="morph">
 
@@ -172,6 +185,7 @@ Turbo: The speed of a single-page web application without having to write any Ja
 Github repo of this project.
 
 References:
+0. Link to code repo
 1. Official docs
 2. https://www.hotrails.dev
 3. Official Morphing: https://dev.37signals.com/a-happier-happy-path-in-turbo-with-morphing/
