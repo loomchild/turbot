@@ -135,7 +135,7 @@ Add ID and data-turbo-permanent
 
 <div id="search" data-turbo-permanent>
   <%= form_with url: events_path, method: :get do |form| %>
-    <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', value: @query, ninput: 'this.form.requestSubmit()' %>
+    <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', value: @query, oninput: 'this.form.requestSubmit()' %>
   <% end %>
 </div>
 
@@ -151,7 +151,7 @@ Scrolling fix -------------------
 <% end %>
 
 Breaks back button scroll -> raised an issue.
-
+Still claryfing, where exactly it needs to be placed. 
 
 
 
