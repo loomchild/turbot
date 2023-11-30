@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <meta name="turbo-refresh-scroll" content="preserve">
+<% end %>
+
 <!-- Chart -->
 <div class="mb-8 opacity-30">
   <%= image_tag "chart-r" %>
@@ -7,18 +11,18 @@
 <h1 class="font-bold text-xl mb-8">Talks</h1>
 
 <!-- Search -->
-<div>
-  <%= form_with url: events_path, method: :get, data: { 'turbo-frame': 'events' } do |form| %>
+<div id="search" data-turbo-permanent>
+  <%= form_with url: events_path, method: :get do |form| %>
     <%= form.text_field :query, placeholder: 'Filter events', autocomplete: 'off', value: @query, oninput: "this.form.requestSubmit()" %>
   <% end %>
 </div>
 
-<turbo-frame id="events">
+<div>
   <!-- Events list -->
   <div class="space-y-4 my-8">
     <% @events.each do |event| %>
       <div>
-        <%= link_to event.title, event, data: { 'turbo-frame': '_top' } %>
+        <%= link_to event.title, event %>
       </div>
     <% end %>
   </div>
@@ -33,7 +37,7 @@
     <%= link_to 'Next', request.query_parameters.merge(page: @page + 1), class: { 'text-gray-400 pointer-events-none': @page >= @last_page } %>
     <%= link_to 'Last', request.query_parameters.merge(page: @last_page), class: { 'text-gray-400 pointer-events-none': @page >= @last_page } %>
   </div>
-</turbo-frame>
+</div>
 
 
 <!-- Lorem ipsum -->
